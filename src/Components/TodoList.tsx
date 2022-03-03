@@ -1,19 +1,30 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './TodoList.module.css'
 import {FilterType} from "../App";
 
 
 
-export const TodoList = ({title, tasks, deleteTask, setFilterValue}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask}: TodoListPropsType) => {
 
+let [taskTitle, setTaskTitle] = useState<string>('')
+
+    const changeTaskTitle = (e: ChangeEvent<HTMLInputElement>) => {
+        setTaskTitle(e.currentTarget.value);
+    }
+    const addNewTask = () => {
+        addTask(taskTitle);
+        setTaskTitle('');
+    }
 
     return (
         <div className={s.todolistContainer}>
             <div>
                 <h3>{title}</h3>
                 <div>
-                    <input type="text"/>
-                    <button>+</button>
+                    <input
+                        onChange={changeTaskTitle}
+                        value={taskTitle}/>
+                    <button onClick={addNewTask}>+</button>
                 </div>
                 <ul className={s.tasksContainer}>
                     {tasks.map(t => <li key={t.id} className={s.taskContainer}>
@@ -34,7 +45,7 @@ export const TodoList = ({title, tasks, deleteTask, setFilterValue}: TodoListPro
 
 // TYPES
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
@@ -42,7 +53,8 @@ export type TaskType = {
 type TodoListPropsType = {
     title: string
     tasks: TaskType[]
-    deleteTask: (id: number) => void
+    deleteTask: (id: string) => void
+    addTask: (title: string) => void
     setFilterValue: (filterValue: FilterType) => void
 }
 
