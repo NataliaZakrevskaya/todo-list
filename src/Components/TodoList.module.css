@@ -10,3 +10,10 @@
     justify-content: flex-start;
     align-items: flex-start;
 }
+
+.taskContainer {
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

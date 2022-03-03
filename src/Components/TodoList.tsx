@@ -1,18 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './TodoList.module.css'
+import {FilterType} from "../App";
 
-type TaskType = {
-    id: number
-    title: string
-    isDone: boolean
-}
 
-type TodoListPropsType = {
-    title: string
-    tasks: TaskType[]
-}
 
-export const TodoList = ({title, tasks}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, deleteTask, setFilterValue}: TodoListPropsType) => {
+
+
     return (
         <div className={s.todolistContainer}>
             <div>
@@ -22,17 +16,33 @@ export const TodoList = ({title, tasks}: TodoListPropsType) => {
                     <button>+</button>
                 </div>
                 <ul className={s.tasksContainer}>
-                    {tasks.map(t => <li key={t.id}>
+                    {tasks.map(t => <li key={t.id} className={s.taskContainer}>
                         <input type={"checkbox"} checked={t.isDone}/>
                         <span>{t.title}</span>
+                        <button onClick={() => deleteTask(t.id)}>X</button>
                     </li>)}
                 </ul>
                 <div>
-                    <button>All</button>
-                    <button>Active</button>
-                    <button>Completed</button>
+                    <button onClick={() => setFilterValue('all')}>All</button>
+                    <button onClick={() => setFilterValue('active')}>Active</button>
+                    <button onClick={() => setFilterValue('completed')}>Completed</button>
                 </div>
             </div>
         </div>
     );
 };
+
+// TYPES
+export type TaskType = {
+    id: number
+    title: string
+    isDone: boolean
+}
+
+type TodoListPropsType = {
+    title: string
+    tasks: TaskType[]
+    deleteTask: (id: number) => void
+    setFilterValue: (filterValue: FilterType) => void
+}
+
