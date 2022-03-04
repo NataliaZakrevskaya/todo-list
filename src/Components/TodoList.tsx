@@ -8,6 +8,10 @@ export const TodoList = (props: TodoListPropsType) => {
     let [taskTitle, setTaskTitle] = useState<string>('')
     let [error, setError] = useState<string | null>(null)
 
+    const removeTodolist = () => {
+        props.removeTodolist(props.id)
+    }
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(e.currentTarget.value);
     }
@@ -40,7 +44,10 @@ export const TodoList = (props: TodoListPropsType) => {
     return (
         <div className={s.todolistContainer}>
             <div>
-                <h3>{props.title}</h3>
+                <div className={s.todolistTitleContainer}>
+                    <h3>{props.title}</h3>
+                    <button onClick={removeTodolist}>x</button>
+                </div>
                 <div>
                     <input
                         onChange={onChangeHandler}
@@ -95,5 +102,6 @@ type TodoListPropsType = {
     addTask: (todolistID: string, title: string) => void
     changeFilter: (todolistID: string, filterValue: FilterType) => void
     changeStatus: (todolistID: string, taskId: string, isDone: boolean) => void
+    removeTodolist: (todolistId: string) => void
 }
 

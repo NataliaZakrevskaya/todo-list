@@ -26,6 +26,12 @@ const App = () => {
         ]
     });
 
+    //CRUD for todolists
+    const removeTodolist = (todolistId: string) => {
+        setTodolists(todolists.filter(tl => tl.id !== todolistId))
+    }
+
+
 
     //CRUD for tasks
     const deleteTask = (todolistID: string, id: string) => {
@@ -82,6 +88,7 @@ const App = () => {
                             changeFilter={changeFilter}
                             changeStatus={changeStatus}
                             filter={tl.filter}
+                            removeTodolist={removeTodolist}
                         />
                     )
                 })
