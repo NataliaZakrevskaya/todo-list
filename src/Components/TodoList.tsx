@@ -1,26 +1,29 @@
-import React, {ChangeEvent, KeyboardEventHandler, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './TodoList.module.css'
 import {FilterType} from "../App";
 
 
-export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask, changeStatus}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask, changeStatus, filter}: TodoListPropsType) => {
 
     let [taskTitle, setTaskTitle] = useState<string>('')
+    let [error, setError] = useState<string | null>(null)
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(e.currentTarget.value);
     }
     const onKeyPressHandler = (e: any) => {
+        setError(null);
         if (e.charCode === 13) {
-            addTask(taskTitle);
-            setTaskTitle('');
+            addNewTask();
         }
     }
 
     const addNewTask = () => {
-        if (taskTitle.trim() !== ''){
-        addTask(taskTitle);
-        setTaskTitle('');
+        if (taskTitle.trim() !== '') {
+            addTask(taskTitle);
+            setTaskTitle('');
+        } else {
+            setError('Title is required');
         }
     }
     const onAllClickHandler = () => {
@@ -43,8 +46,10 @@ export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask, cha
                         onChange={onChangeHandler}
                         value={taskTitle}
                         onKeyPress={onKeyPressHandler}
+                        className={error ? 'error' : ''}
                     />
                     <button onClick={addNewTask}>+</button>
+                    {error && <div className='error-message'>{error}</div>}
                 </div>
                 <ul className={s.tasksContainer}>
                     {
@@ -65,9 +70,9 @@ export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask, cha
                     }
                 </ul>
                 <div>
-                    <button onClick={onAllClickHandler}>All</button>
-                    <button onClick={onActiveClickHandler}>Active</button>
-                    <button onClick={onCompletedClickHandler}>Completed</button>
+                    <button className={filter === 'all' ? 'active-filter' : ''} onClick={onAllClickHandler}>All</button>
+                    <button className={filter === 'active' ? 'active-filter' : ''}onClick={onActiveClickHandler}>Active</button>
+                    <button className={filter === 'completed' ? 'active-filter' : ''}onClick={onCompletedClickHandler}>Completed</button>
                 </div>
             </div>
         </div>
@@ -84,6 +89,7 @@ export type TaskType = {
 type TodoListPropsType = {
     title: string
     tasks: TaskType[]
+    filter: FilterType
     deleteTask: (id: string) => void
     addTask: (title: string) => void
     setFilterValue: (filterValue: FilterType) => void

@@ -5,4 +5,16 @@
   justify-content: center;
 }
 
+.error {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+}
+
+.active-filter {
+  background-color: #93d69e;
+}
+
 
