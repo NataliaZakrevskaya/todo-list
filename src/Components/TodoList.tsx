@@ -3,7 +3,7 @@ import s from './TodoList.module.css'
 import {FilterType} from "../App";
 
 
-export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask, changeStatus}: TodoListPropsType) => {
 
     let [taskTitle, setTaskTitle] = useState<string>('')
 
@@ -18,8 +18,10 @@ export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask}: To
     }
 
     const addNewTask = () => {
+        if (taskTitle.trim() !== ''){
         addTask(taskTitle);
         setTaskTitle('');
+        }
     }
     const onAllClickHandler = () => {
         setFilterValue('all');
@@ -49,9 +51,13 @@ export const TodoList = ({title, tasks, deleteTask, setFilterValue, addTask}: To
                         tasks.map(t => {
 
                             const onClickHandler = () => deleteTask(t.id)
+                            const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                                let newIsDoneValue = e.currentTarget.checked;
+                                changeStatus(t.id, newIsDoneValue)
+                            }
 
                             return <li key={t.id} className={s.taskContainer}>
-                                <input type={"checkbox"} checked={t.isDone}/>
+                                <input type={"checkbox"} checked={t.isDone} onChange={onChangeHandler}/>
                                 <span>{t.title}</span>
                                 <button onClick={onClickHandler}>X</button>
                             </li>
@@ -81,5 +87,6 @@ type TodoListPropsType = {
     deleteTask: (id: string) => void
     addTask: (title: string) => void
     setFilterValue: (filterValue: FilterType) => void
+    changeStatus: (taskId: string, isDone: boolean) => void
 }
 
