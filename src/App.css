@@ -17,4 +17,8 @@
   background-color: #93d69e;
 }
 
+.is-done {
+  opacity: 0.5;
+}
+
 
