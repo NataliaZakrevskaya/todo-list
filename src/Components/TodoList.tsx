@@ -5,6 +5,7 @@ import {AddItemForm} from "./Common-components/AddItemForm";
 import {EditableSpan} from "./Common-components/EditableSpan";
 import {Button, Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
+import {TaskType} from "../BLL/tasks-reducer";
 
 
 export const TodoList = (props: TodoListPropsType) => {
@@ -92,11 +93,7 @@ export const TodoList = (props: TodoListPropsType) => {
 
 
 // TYPES
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}
+
 
 type TodoListPropsType = {
     id: string

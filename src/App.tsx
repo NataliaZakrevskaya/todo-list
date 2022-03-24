@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TaskType, TodoList} from "./Components/TodoList";
+import {TodoList} from "./Components/TodoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./Components/Common-components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {TodolistType} from "./BLL/todolists-reducer";
+import {TasksStateType} from "./BLL/tasks-reducer";
 
 
 const App = () => {
@@ -154,6 +155,3 @@ export default App;
 
 // TYPES
 export type FilterType = 'all' | 'active' | 'completed'
-export type TasksStateType = {
-    [key: string]: TaskType[]
-}
