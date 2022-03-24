@@ -5,6 +5,7 @@ import {v1} from "uuid";
 import {AddItemForm} from "./Components/Common-components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
+import {TodolistType} from "./BLL/todolists-reducer";
 
 
 const App = () => {
@@ -153,11 +154,6 @@ export default App;
 
 // TYPES
 export type FilterType = 'all' | 'active' | 'completed'
-type TodolistType = {
-    id: string
-    title: string
-    filter: FilterType
-}
-type TasksStateType = {
+export type TasksStateType = {
     [key: string]: TaskType[]
 }
