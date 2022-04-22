@@ -1,9 +1,0 @@
-.todolistTitleContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: x-large;
-    font-weight: bold;
-}
-
