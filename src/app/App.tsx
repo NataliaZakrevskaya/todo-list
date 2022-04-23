@@ -1,12 +1,10 @@
 import React, {useEffect} from 'react'
-import './App.css'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './store'
 import {RequestStatusType} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -16,7 +14,8 @@ import {Login} from "../features/Login/Login";
 import {Routes, Route, Navigate} from "react-router-dom";
 import {initializeAppTC, logoutTC} from "../features/Login/auth-reducer";
 import {CircularProgress} from "@mui/material";
-import {Menu} from "@material-ui/icons";
+// @ts-ignore
+import s from "./App.module.css"
 
 type PropsType = {
     demo?: boolean
@@ -47,15 +46,12 @@ const App = ({demo = false}: PropsType) => {
     return (
         <div className="App">
             <ErrorSnackbar/>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
-                    </IconButton>
-                    <Typography variant="h6">
-                        News
+            <AppBar position="static" color='primary'>
+                <Toolbar className={s.toolBar} variant={'regular'}>
+                    <Typography variant="overline" style={{fontSize: '24px'}}>
+                        Todo List
                     </Typography>
-                    {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>LOGOUT</Button>}
+                    {isLoggedIn && <Button color="inherit" variant="outlined" onClick={logoutHandler} style={{fontSize: '16px'}}>LOG OUT</Button>}
                 </Toolbar>
                 {status === 'loading' && <LinearProgress/>}
             </AppBar>

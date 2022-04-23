@@ -9,6 +9,8 @@ import { FilterValuesType, TodolistDomainType } from '../todolists-reducer'
 import { useDispatch } from 'react-redux'
 import { fetchTasksTC } from '../tasks-reducer'
 import {Delete} from "@material-ui/icons";
+// @ts-ignore
+import s from "./Todolist.module.css";
 
 type PropsType = {
     todolist: TodolistDomainType
@@ -60,12 +62,13 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
         tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed)
     }
 
-    return <div>
-        <h3><EditableSpan value={props.todolist.title} onChange={changeTodolistTitle}/>
-            <IconButton onClick={removeTodolist} disabled={props.todolist.entityStatus === 'loading'}>
+    return <div className={s.todoList}>
+        <h1>
+            <EditableSpan value={props.todolist.title} onChange={changeTodolistTitle}/>
+            <IconButton onClick={removeTodolist} size="large" disabled={props.todolist.entityStatus === 'loading'}>
                 <Delete/>
             </IconButton>
-        </h3>
+        </h1>
         <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === 'loading'}/>
         <div>
             {

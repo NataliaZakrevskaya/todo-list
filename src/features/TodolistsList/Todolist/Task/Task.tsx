@@ -4,6 +4,8 @@ import IconButton from '@mui/material/IconButton';
 import Checkbox from '@mui/material/Checkbox';
 import {TaskStatuses, TaskType} from '../../../../api/todolists-api'
 import {Delete} from "@material-ui/icons";
+//@ts-ignore
+import s from "./Task.module.css"
 
 type TaskPropsType = {
     task: TaskType
@@ -24,7 +26,7 @@ export const Task = React.memo((props: TaskPropsType) => {
         props.changeTaskTitle(props.task.id, newValue, props.todolistId)
     }, [props.task.id, props.todolistId]);
 
-    return <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? 'is-done' : ''}>
+    return <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? `${s.isDone} ${s.task}` : s.task}>
         <Checkbox
             checked={props.task.status === TaskStatuses.Completed}
             color="primary"
