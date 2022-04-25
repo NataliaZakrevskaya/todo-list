@@ -11,7 +11,8 @@ import {useFormik} from "formik";
 import {loginTC} from "./auth-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import {Navigate} from "react-router-dom"
+import {Navigate} from "react-router-dom";
+import style from "./Login.module.css"
 
 type FormikErrorType = {
     email?: string
@@ -55,7 +56,7 @@ export const Login = () => {
         return <Navigate to={'/'}/>
     }
 
-    return <Grid container justifyContent={'center'}>
+    return <Grid container className={style.loginBlock}>
         <Grid item justifyContent={'center'}>
             <form onSubmit={formik.handleSubmit}>
                 <FormControl>

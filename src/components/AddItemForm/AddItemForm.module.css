@@ -1,0 +1,8 @@
+.addItemFormBlock{
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

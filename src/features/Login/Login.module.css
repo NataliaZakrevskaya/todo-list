@@ -1,0 +1,10 @@
+.loginBlock{
+    margin: 10% auto;
+    width: 400px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+}
