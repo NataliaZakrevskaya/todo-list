@@ -12,7 +12,7 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { AppRootStateType } from '../../app/store';
+import { AppRootStateType } from 'app/store';
 
 import { loginTC } from './auth-reducer';
 import style from './Login.module.css';

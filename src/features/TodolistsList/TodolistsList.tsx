@@ -5,10 +5,6 @@ import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { TaskStatuses } from '../../api/todolists-api';
-import { AppRootStateType } from '../../app/store';
-import { AddItemForm } from '../../components/AddItemForm/AddItemForm';
-
 import { addTaskTC, removeTaskTC, TasksStateType, updateTaskTC } from './tasks-reducer';
 import { Todolist } from './Todolist/Todolist';
 import {
@@ -20,6 +16,10 @@ import {
   removeTodolistTC,
   TodolistDomainType,
 } from './todolists-reducer';
+
+import { TaskStatuses } from 'api/todolists-api';
+import { AppRootStateType } from 'app/store';
+import { AddItemForm } from 'components/AddItemForm/AddItemForm';
 
 type PropsType = {
   demo: boolean;

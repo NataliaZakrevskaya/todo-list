@@ -10,22 +10,20 @@ import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
-import { initializeAppTC, logoutTC } from '../features/Login/auth-reducer';
-import { Login } from '../features/Login/Login';
-import { TodolistsList } from '../features/TodolistsList/TodolistsList';
-
 import { RequestStatusType } from './app-reducer';
-
-// @ts-ignore
 import s from './App.module.css';
 import { AppRootStateType } from './store';
+
+import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
+import { initializeAppTC, logoutTC } from 'features/Login/auth-reducer';
+import { Login } from 'features/Login/Login';
+import { TodolistsList } from 'features/TodolistsList/TodolistsList';
 
 type PropsType = {
   demo?: boolean;
 };
 
-const App = ( { demo = false }: PropsType) => {
+const App = ({ demo = false }: PropsType) => {
   const status = useSelector<AppRootStateType, RequestStatusType>(
     state => state.app.status,
   );
