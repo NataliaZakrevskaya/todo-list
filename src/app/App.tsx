@@ -14,10 +14,8 @@ import { RequestStatusType } from './app-reducer';
 import s from './App.module.css';
 import { AppRootStateType } from './store';
 
-import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
-import { initializeAppTC, logoutTC } from 'features/Login/auth-reducer';
-import { Login } from 'features/Login/Login';
-import { TodolistsList } from 'features/TodolistsList/TodolistsList';
+import { ErrorSnackbar } from 'components';
+import { initializeAppTC, logoutTC, Login, TodolistsList } from 'features';
 
 type PropsType = {
   demo?: boolean;

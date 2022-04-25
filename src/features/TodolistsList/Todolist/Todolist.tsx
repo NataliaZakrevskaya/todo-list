@@ -5,15 +5,15 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 
-import { fetchTasksTC } from '../tasks-reducer';
 import { FilterValuesType, TodolistDomainType } from '../todolists-reducer';
 
-import { Task } from './Task/Task';
+import { Task } from './Task';
 import s from './Todolist.module.css';
 
-import { TaskStatuses, TaskType } from 'api/todolists-api';
-import { AddItemForm } from 'components/AddItemForm/AddItemForm';
-import { EditableSpan } from 'components/EditableSpan/EditableSpan';
+import { TaskType } from 'api/types';
+import { AddItemForm, EditableSpan } from 'components';
+import { TaskStatuses } from 'enums';
+import { fetchTasksTC } from 'features';
 
 type PropsType = {
   todolist: TodolistDomainType;
@@ -45,7 +45,7 @@ export const Todolist = React.memo(({ demo = false, ...props }: PropsType) => {
     [props.addTask, props.todolist.id],
   );
 
-  const removeTodolist = () => {
+  const removeTodolist = (): void => {
     props.removeTodolist(props.todolist.id);
   };
   const changeTodolistTitle = useCallback(

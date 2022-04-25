@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 
-import { todolistsAPI, TodolistType } from 'api/todolists-api';
+import { todolistsAPI } from 'api/todolistsAPI/todolistsAPI';
+import { TodolistType } from 'api/types';
 import {
   RequestStatusType,
   setAppStatusAC,
@@ -71,13 +72,10 @@ export const fetchTodolistsTC = () => (dispatch: ThunkDispatch) => {
   });
 };
 export const removeTodolistTC = (todolistId: string) => (dispatch: ThunkDispatch) => {
-  // изменим глобальный статус приложения, чтобы вверху полоса побежала
   dispatch(setAppStatusAC('loading'));
-  // изменим статус конкретного тудулиста, чтобы он мог задизеблить что надо
   dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'));
-  todolistsAPI.deleteTodolist(todolistId).then(res => {
+  todolistsAPI.deleteTodolist(todolistId).then(() => {
     dispatch(removeTodolistAC(todolistId));
-    // скажем глобально приложению, что асинхронная операция завершена
     dispatch(setAppStatusAC('succeeded'));
   });
 };
@@ -90,7 +88,7 @@ export const addTodolistTC = (title: string) => (dispatch: ThunkDispatch) => {
 };
 export const changeTodolistTitleTC =
   (id: string, title: string) => (dispatch: Dispatch<ActionsType>) => {
-    todolistsAPI.updateTodolist(id, title).then(res => {
+    todolistsAPI.updateTodolist(id, title).then(() => {
       dispatch(changeTodolistTitleAC(id, title));
     });
   };

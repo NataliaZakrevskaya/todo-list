@@ -1,5 +1,9 @@
 import { Dispatch } from 'redux';
 
+import { todolistsAPI } from '../../api/todolistsAPI/todolistsAPI';
+import { TaskType, UpdateTaskModelType } from '../../api/types';
+import { ResultCodes, TaskPriorities, TaskStatuses } from '../../enums';
+
 import {
   AddTodolistActionType,
   RemoveTodolistActionType,
@@ -7,19 +11,12 @@ import {
 } from './todolists-reducer';
 
 import {
-  TaskPriorities,
-  TaskStatuses,
-  TaskType,
-  todolistsAPI,
-  UpdateTaskModelType,
-} from 'api/todolists-api';
-import {
   SetAppErrorActionType,
   setAppStatusAC,
   SetAppStatusActionType,
 } from 'app/app-reducer';
 import { AppRootStateType } from 'app/store';
-import { handleServerAppError, handleServerNetworkError } from 'utils/error-utils';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 const initialState: TasksStateType = {};
 
@@ -47,10 +44,11 @@ export const tasksReducer = (
       };
     case 'ADD-TODOLIST':
       return { ...state, [action.todolist.id]: [] };
-    case 'REMOVE-TODOLIST':
+    case 'REMOVE-TODOLIST': {
       const copyState = { ...state };
       delete copyState[action.id];
       return copyState;
+    }
     case 'SET-TODOLISTS': {
       const copyState = { ...state };
       action.todolists.forEach(tl => {
@@ -148,7 +146,7 @@ export const updateTaskTC =
     todolistsAPI
       .updateTask(todolistId, taskId, apiModel)
       .then(res => {
-        if (res.data.resultCode === 0) {
+        if (res.data.resultCode === ResultCodes.Success) {
           const action = updateTaskAC(taskId, domainModel, todolistId);
           dispatch(action);
         } else {

@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { ResponseType } from 'api/todolists-api';
+import { ResponseType } from 'api/types';
 import {
   setAppErrorAC,
   SetAppErrorActionType,
@@ -23,7 +23,7 @@ export const handleServerAppError = <D>(
 export const handleServerNetworkError = (
   error: { message: string },
   dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>,
-) => {
+): void => {
   dispatch(setAppErrorAC(error.message ? error.message : 'Some error occurred'));
   dispatch(setAppStatusAC('failed'));
 };

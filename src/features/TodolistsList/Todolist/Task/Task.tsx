@@ -4,10 +4,11 @@ import { Delete } from '@material-ui/icons';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 
-import { TaskStatuses, TaskType } from '../../../../api/todolists-api';
-import { EditableSpan } from '../../../../components/EditableSpan/EditableSpan';
-
 import s from './Task.module.css';
+
+import { TaskType } from 'api/types';
+import { EditableSpan } from 'components';
+import { TaskStatuses } from 'enums';
 
 type TaskPropsType = {
   task: TaskType;
