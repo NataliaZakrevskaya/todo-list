@@ -12,16 +12,15 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { EMPTY_STRING } from '../../constants';
+
 import { loginTC } from './auth-reducer';
+import { MIN_PASSWORD_LENGTH } from './constants';
+import { ErrorValues } from '../enums/enums';
 import style from './Login.module.css';
+import { FormikErrorType } from './types';
 
 import { AppRootStateType } from 'app/store';
-
-type FormikErrorType = {
-  email?: string;
-  password?: string;
-  rememberMe?: boolean;
-};
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -29,21 +28,21 @@ export const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: EMPTY_STRING,
+      password: EMPTY_STRING,
       rememberMe: false,
     },
     validate: values => {
       const errors: FormikErrorType = {};
       if (!values.email) {
-        errors.email = 'Required';
+        errors.email = ErrorValues.Required;
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
+        errors.email = ErrorValues.Invalid_address;
       }
       if (!values.password) {
-        errors.password = 'Required';
-      } else if (values.password.length < 3) {
-        errors.password = 'Password should be more than 3 symbols';
+        errors.password = ErrorValues.Required;
+      } else if (values.password.length < MIN_PASSWORD_LENGTH) {
+        errors.password = ErrorValues.Password_length;
       }
       return errors;
     },

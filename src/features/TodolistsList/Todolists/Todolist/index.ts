@@ -1,0 +1,13 @@
+export { tasksReducer } from '../../Tasks/tasksReducer/tasksReducer';
+export { removeTaskAC } from '../../Tasks/tasksReducer/tasksReducer';
+export { addTaskAC } from '../../Tasks/tasksReducer/tasksReducer';
+export { updateTaskAC } from '../../Tasks/tasksReducer/tasksReducer';
+export { setTasksAC } from '../../Tasks/tasksReducer/tasksReducer';
+export { removeTodolistAC } from '../todolistsReducer/todolistsReducer';
+export { addTodolistAC } from '../todolistsReducer/todolistsReducer';
+export { changeTodolistTitleAC } from '../todolistsReducer/todolistsReducer';
+export { changeTodolistFilterAC } from '../todolistsReducer/todolistsReducer';
+export { changeTodolistEntityStatusAC } from '../todolistsReducer/todolistsReducer';
+export { setTodolistsAC } from '../todolistsReducer/todolistsReducer';
+export { todolistsReducer } from '../todolistsReducer/todolistsReducer';
+export { TodolistsList } from '../../TodolistsList';
