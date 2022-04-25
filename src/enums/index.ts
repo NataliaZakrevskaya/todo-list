@@ -16,3 +16,10 @@ export enum TaskPriorities {
 export enum ResultCodes {
   Success = 0,
 }
+
+export enum ErrorValues {
+  Required = 'Required',
+  Invalid_address = 'Invalid email address',
+  Password_length = 'Password should be more than 3 symbols',
+  Some_Error = 'Some error occurred',
+}

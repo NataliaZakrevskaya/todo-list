@@ -1,15 +1,5 @@
 import { Dispatch } from 'redux';
 
-import { todolistsAPI } from '../../../../api/todolistsAPI/todolistsAPI';
-import { UpdateTaskModelType } from '../../../../api/types';
-import {
-  SetAppErrorActionType,
-  setAppStatusAC,
-  SetAppStatusActionType,
-} from '../../../../app/app-reducer';
-import { AppRootStateType } from '../../../../app/store';
-import { ResultCodes } from '../../../../enums';
-import { handleServerAppError, handleServerNetworkError } from '../../../../utils';
 import { LoadingStatuses } from '../../../enums/enums';
 import { ActionsType, ThunkDispatch, UpdateDomainTaskModelType } from '../../types';
 import {
@@ -18,6 +8,17 @@ import {
   setTasksAC,
   updateTaskAC,
 } from '../tasksReducer/tasksReducer';
+
+import { todolistsAPI } from 'api/todolistsAPI/todolistsAPI';
+import { UpdateTaskModelType } from 'api/types';
+import {
+  SetAppErrorActionType,
+  setAppStatusAC,
+  SetAppStatusActionType,
+} from 'app/app-reducer';
+import { AppRootStateType } from 'app/store';
+import { ResultCodes } from 'enums';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const fetchTasksTC =
   (todolistId: string) => (dispatch: Dispatch<ActionsType | SetAppStatusActionType>) => {

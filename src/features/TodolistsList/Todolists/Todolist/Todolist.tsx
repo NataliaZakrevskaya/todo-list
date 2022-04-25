@@ -6,13 +6,13 @@ import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 
 import { FilterValues } from '../../../enums/enums';
+import { fetchTasksTC } from '../../Tasks/tasksThunk/tasksThunk';
 import { TodolistPropsType } from '../types/types';
 
 import style from './Todolist.module.css';
 
 import { AddItemForm, EditableSpan } from 'components';
 import { TaskStatuses } from 'enums';
-import { fetchTasksTC } from 'features';
 import { Task } from 'features/TodolistsList/Tasks/Task/Task';
 
 export const Todolist = React.memo(({ demo = false, ...props }: TodolistPropsType) => {

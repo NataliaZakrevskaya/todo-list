@@ -1,4 +1,3 @@
-import { TaskType, TodolistType } from '../../../../api/types';
 import { ActionsType, TasksStateType, UpdateDomainTaskModelType } from '../../types';
 import {
   ADD_TASK,
@@ -9,6 +8,8 @@ import {
   SET_TODOLISTS,
   UPDATE_TASK,
 } from '../constants';
+
+import { TaskType, TodolistType } from 'api/types';
 
 const initialState: TasksStateType = {};
 
@@ -57,7 +58,6 @@ export const tasksReducer = (
   }
 };
 
-// actions
 export const removeTaskAC = (taskId: string, todolistId: string) =>
   ({ type: REMOVE_TASK, taskId, todolistId } as const);
 export const addTaskAC = (task: TaskType) => ({ type: ADD_TASK, task } as const);

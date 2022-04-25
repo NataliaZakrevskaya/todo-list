@@ -1,0 +1,9 @@
+export { tasksReducer } from './tasksReducer';
+export { removeTaskAC } from './tasksReducer';
+export { addTaskAC } from './tasksReducer';
+export { updateTaskAC } from './tasksReducer';
+export { setTasksAC } from './tasksReducer';
+export { fetchTasksTC } from './tasksThunk';
+export { removeTaskTC } from './tasksThunk';
+export { addTaskTC } from './tasksThunk';
+export { updateTaskTC } from './tasksThunk';

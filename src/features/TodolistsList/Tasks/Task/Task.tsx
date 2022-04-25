@@ -4,19 +4,13 @@ import { Delete } from '@material-ui/icons';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 
-import s from './Task.module.css';
+import { TaskPropsType } from '../types';
 
-import { TaskType } from 'api/types';
+import style from './Task.module.css';
+
 import { EditableSpan } from 'components';
 import { TaskStatuses } from 'enums';
 
-type TaskPropsType = {
-  task: TaskType;
-  todolistId: string;
-  changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void;
-  changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void;
-  removeTask: (taskId: string, todolistId: string) => void;
-};
 export const Task = React.memo((props: TaskPropsType) => {
   const onClickHandler = useCallback(
     () => props.removeTask(props.task.id, props.todolistId),
@@ -46,7 +40,9 @@ export const Task = React.memo((props: TaskPropsType) => {
     <div
       key={props.task.id}
       className={
-        props.task.status === TaskStatuses.Completed ? `${s.isDone} ${s.task}` : s.task
+        props.task.status === TaskStatuses.Completed
+          ? `${style.isDone} ${style.task}`
+          : style.task
       }
     >
       <Checkbox

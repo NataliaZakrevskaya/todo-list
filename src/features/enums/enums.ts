@@ -1,9 +1,3 @@
-export enum ErrorValues {
-  Required = 'Required',
-  Invalid_address = 'Invalid email address',
-  Password_length = 'Password should be more than 3 symbols',
-}
-
 export enum LoadingStatuses {
   Loading = 'loading',
   Succeeded = 'succeeded',

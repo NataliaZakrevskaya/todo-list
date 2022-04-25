@@ -1,5 +1,9 @@
 import { Dispatch } from 'redux';
 
+import { FIRST_ELEMENT_IN_ARRAY } from '../constants';
+import { ErrorValues } from '../enums';
+import { LoadingStatuses } from '../features/enums/enums';
+
 import { ResponseType } from 'api/types';
 import {
   setAppErrorAC,
@@ -13,17 +17,17 @@ export const handleServerAppError = <D>(
   dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>,
 ) => {
   if (data.messages.length) {
-    dispatch(setAppErrorAC(data.messages[0]));
+    dispatch(setAppErrorAC(data.messages[FIRST_ELEMENT_IN_ARRAY]));
   } else {
-    dispatch(setAppErrorAC('Some error occurred'));
+    dispatch(setAppErrorAC(ErrorValues.Some_Error));
   }
-  dispatch(setAppStatusAC('failed'));
+  dispatch(setAppStatusAC(LoadingStatuses.Failed));
 };
 
 export const handleServerNetworkError = (
   error: { message: string },
   dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>,
 ): void => {
-  dispatch(setAppErrorAC(error.message ? error.message : 'Some error occurred'));
-  dispatch(setAppStatusAC('failed'));
+  dispatch(setAppErrorAC(error.message ? error.message : ErrorValues.Some_Error));
+  dispatch(setAppStatusAC(LoadingStatuses.Failed));
 };
