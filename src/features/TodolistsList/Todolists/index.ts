@@ -1,3 +1,7 @@
+export { fetchTodolistsTC } from './todolistsThunk';
+export { removeTodolistTC } from './todolistsThunk';
+export { addTodolistTC } from './todolistsThunk';
+export { changeTodolistTitleTC } from './todolistsThunk';
 export { todolistsReducer } from './todolistsReducer';
 export { removeTodolistAC } from './todolistsReducer';
 export { addTodolistAC } from './todolistsReducer';
@@ -5,3 +9,4 @@ export { changeTodolistTitleAC } from './todolistsReducer';
 export { changeTodolistFilterAC } from './todolistsReducer';
 export { changeTodolistEntityStatusAC } from './todolistsReducer';
 export { setTodolistsAC } from './todolistsReducer';
+export { Todolist } from './Todolist';

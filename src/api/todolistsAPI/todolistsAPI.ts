@@ -1,13 +1,10 @@
 import { AxiosResponse } from 'axios';
 
 import { instance } from '../apiConfig';
-import {
-  GetTasksResponse,
-  TaskType,
-  TodolistType,
-  UpdateTaskModelType,
-  ResponseType,
-} from '../types';
+import { GetTasksResponse, UpdateTaskModelType, ResponseType } from '../types';
+
+import { TaskType } from 'features/TodolistsList/Tasks/types';
+import { TodolistType } from 'features/TodolistsList/Todolists/types/types';
 
 export const todolistsAPI = {
   getTodolists() {

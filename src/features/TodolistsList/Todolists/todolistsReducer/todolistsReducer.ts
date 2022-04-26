@@ -1,5 +1,4 @@
-import { FilterValues, LoadingStatuses } from '../../../enums/enums';
-import { ActionsType } from '../../types';
+import { FilterValues, LoadingStatuses } from '../../../enums';
 import {
   ADD_TODOLIST,
   CHANGE_TODOLIST_FILTER,
@@ -8,16 +7,20 @@ import {
   REMOVE_TODOLIST,
   SET_TODOLISTS,
 } from '../constants';
-import { FilterValuesType, TodolistDomainType } from '../types/types';
+import {
+  FilterValuesType,
+  TodolistDomainType,
+  TodolistsReducerActionsType,
+  TodolistType,
+} from '../types/types';
 
-import { TodolistType } from 'api/types';
 import { RequestStatusType } from 'app/app-reducer';
 
 const initialState: Array<TodolistDomainType> = [];
 
 export const todolistsReducer = (
   state: Array<TodolistDomainType> = initialState,
-  action: ActionsType,
+  action: TodolistsReducerActionsType,
 ): Array<TodolistDomainType> => {
   switch (action.type) {
     case REMOVE_TODOLIST:
@@ -38,11 +41,13 @@ export const todolistsReducer = (
       );
     case CHANGE_TODOLIST_FILTER:
       return state.map(todolist =>
-        todolist.id === action.id ? { ...todolist, filter: action.filter } : todolist,
+        todolist.id === action.todolistId
+          ? { ...todolist, filter: action.filter }
+          : todolist,
       );
     case CHANGE_TODOLIST_STATUS:
       return state.map(todolist =>
-        todolist.id === action.id
+        todolist.id === action.todolistId
           ? { ...todolist, entityStatus: action.status }
           : todolist,
       );

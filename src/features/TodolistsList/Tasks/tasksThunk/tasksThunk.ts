@@ -1,13 +1,12 @@
 import { Dispatch } from 'redux';
 
-import { LoadingStatuses } from '../../../enums/enums';
-import { ActionsType, ThunkDispatch, UpdateDomainTaskModelType } from '../../types';
+import { LoadingStatuses } from '../../../enums';
 import {
-  addTaskAC,
-  removeTaskAC,
-  setTasksAC,
-  updateTaskAC,
-} from '../tasksReducer/tasksReducer';
+  TasksReducerActionsType,
+  TasksThunkDispatch,
+  TaskType,
+  UpdateDomainTaskModelType,
+} from '../types';
 
 import { todolistsAPI } from 'api/todolistsAPI/todolistsAPI';
 import { UpdateTaskModelType } from 'api/types';
@@ -18,10 +17,12 @@ import {
 } from 'app/app-reducer';
 import { AppRootStateType } from 'app/store';
 import { ResultCodes } from 'enums';
+import { addTaskAC, removeTaskAC, setTasksAC, updateTaskAC } from 'features';
 import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const fetchTasksTC =
-  (todolistId: string) => (dispatch: Dispatch<ActionsType | SetAppStatusActionType>) => {
+  (todolistId: string) =>
+  (dispatch: Dispatch<TasksReducerActionsType | SetAppStatusActionType>) => {
     dispatch(setAppStatusAC(LoadingStatuses.Loading));
     todolistsAPI.getTasks(todolistId).then(res => {
       const tasks = res.data.items;
@@ -30,14 +31,19 @@ export const fetchTasksTC =
     });
   };
 export const removeTaskTC =
-  (taskId: string, todolistId: string) => (dispatch: Dispatch<ActionsType>) => {
+  (taskId: string, todolistId: string) =>
+  (dispatch: Dispatch<TasksReducerActionsType>) => {
     todolistsAPI.deleteTask(todolistId, taskId).then(() => {
       dispatch(removeTaskAC(taskId, todolistId));
     });
   };
 export const addTaskTC =
   (title: string, todolistId: string) =>
-  (dispatch: Dispatch<ActionsType | SetAppErrorActionType | SetAppStatusActionType>) => {
+  (
+    dispatch: Dispatch<
+      TasksReducerActionsType | SetAppErrorActionType | SetAppStatusActionType
+    >,
+  ) => {
     dispatch(setAppStatusAC(LoadingStatuses.Loading));
     todolistsAPI
       .createTask(todolistId, title)
@@ -56,9 +62,9 @@ export const addTaskTC =
   };
 export const updateTaskTC =
   (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
-  (dispatch: ThunkDispatch, getState: () => AppRootStateType) => {
+  (dispatch: TasksThunkDispatch, getState: () => AppRootStateType) => {
     const state = getState();
-    const task = state.tasks[todolistId].find(t => t.id === taskId);
+    const task = state.tasks[todolistId].find((tasks: TaskType) => tasks.id === taskId);
     if (!task) {
       // throw new Error("task not found in the state");
       console.warn('task not found in the state');

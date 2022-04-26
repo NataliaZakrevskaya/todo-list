@@ -2,9 +2,9 @@ import { Dispatch } from 'redux';
 
 import { authAPI } from '../../api/authAPI/authAPI';
 import { LoginParamsType } from '../../api/types';
+import { LoadingStatuses } from '../enums';
 
 import { SET_IS_LOGGED_IN } from './constants';
-import { LoadingStatuses } from '../enums/enums';
 import { AuthReducerActionsType, InitialStateType } from './types';
 
 import { setAppStatusAC, setIsInitializedAC } from 'app';

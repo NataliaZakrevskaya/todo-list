@@ -2,7 +2,6 @@ import { Dispatch } from 'redux';
 
 import { FIRST_ELEMENT_IN_ARRAY } from '../constants';
 import { ErrorValues } from '../enums';
-import { LoadingStatuses } from '../features/enums/enums';
 
 import { ResponseType } from 'api/types';
 import {
@@ -11,6 +10,7 @@ import {
   setAppStatusAC,
   SetAppStatusActionType,
 } from 'app/app-reducer';
+import { LoadingStatuses } from 'features/enums';
 
 export const handleServerAppError = <D>(
   data: ResponseType<D>,

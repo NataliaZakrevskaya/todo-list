@@ -1,4 +1,4 @@
-import { ActionsType, TasksStateType, UpdateDomainTaskModelType } from '../../types';
+import { TodolistType } from '../../Todolists/types/types';
 import {
   ADD_TASK,
   ADD_TODOLIST,
@@ -9,20 +9,25 @@ import {
   UPDATE_TASK,
 } from '../constants';
 
-import { TaskType, TodolistType } from 'api/types';
+import {
+  TasksReducerActionsType,
+  TasksStateType,
+  UpdateDomainTaskModelType,
+  TaskType,
+} from 'features/TodolistsList/Tasks/types';
 
 const initialState: TasksStateType = {};
 
 export const tasksReducer = (
   state: TasksStateType = initialState,
-  action: ActionsType,
+  action: TasksReducerActionsType,
 ): TasksStateType => {
   switch (action.type) {
     case REMOVE_TASK:
       return {
         ...state,
         [action.todolistId]: state[action.todolistId].filter(
-          task => task.id !== action.taskId,
+          (task: TaskType) => task.id !== action.taskId,
         ),
       };
     case ADD_TASK:
@@ -33,7 +38,7 @@ export const tasksReducer = (
     case UPDATE_TASK:
       return {
         ...state,
-        [action.todolistId]: state[action.todolistId].map(task =>
+        [action.todolistId]: state[action.todolistId].map((task: TaskType) =>
           task.id === action.taskId ? { ...task, ...action.model } : task,
         ),
       };
@@ -41,7 +46,7 @@ export const tasksReducer = (
       return { ...state, [action.todolist.id]: [] };
     case REMOVE_TODOLIST: {
       const copyState = { ...state };
-      delete copyState[action.id];
+      delete copyState[action.todolistId];
       return copyState;
     }
     case SET_TODOLISTS: {

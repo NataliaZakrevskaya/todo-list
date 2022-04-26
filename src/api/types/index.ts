@@ -1,4 +1,5 @@
-import { TaskPriorities, TaskStatuses } from '../../enums';
+import { TaskPriorities, TaskStatuses } from 'enums';
+import { TaskType } from 'features/TodolistsList/Tasks/types';
 
 export type LoginParamsType = {
   email: string;
@@ -13,12 +14,6 @@ export type MeResponseType = {
   login: string;
 };
 
-export type TodolistType = {
-  id: string;
-  title: string;
-  addedDate: string;
-  order: number;
-};
 export type ResponseType<D = {}> = {
   resultCode: number;
   messages: Array<string>;
@@ -26,18 +21,6 @@ export type ResponseType<D = {}> = {
   data: D;
 };
 
-export type TaskType = {
-  description: string;
-  title: string;
-  status: TaskStatuses;
-  priority: TaskPriorities;
-  startDate: string;
-  deadline: string;
-  id: string;
-  todoListId: string;
-  order: number;
-  addedDate: string;
-};
 export type UpdateTaskModelType = {
   title: string;
   description: string;

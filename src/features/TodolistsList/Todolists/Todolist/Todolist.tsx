@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 
-import { FilterValues } from '../../../enums/enums';
+import { FilterValues } from '../../../enums';
 import { fetchTasksTC } from '../../Tasks/tasksThunk/tasksThunk';
 import { TodolistPropsType } from '../types/types';
 

@@ -5,30 +5,27 @@ import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { TaskStatuses } from '../../enums';
-
-import { Todolist } from './Todolists/Todolist/Todolist';
+import { TasksStateType } from './Tasks/types';
 import {
-  fetchTodolistsTC,
-  removeTodolistTC,
-} from './Todolists/todolistsThunk/todolistsThunk';
-import { FilterValuesType, TodolistDomainType } from './Todolists/types/types';
-import { TasksStateType } from './types';
+  FilterValuesType,
+  TodolistDomainType,
+  TodolistsListPropsType,
+} from './Todolists/types/types';
 
 import { AppRootStateType } from 'app/store';
 import { AddItemForm } from 'components';
+import { TaskStatuses } from 'enums';
 import {
+  fetchTodolistsTC,
+  removeTodolistTC,
+  Todolist,
   addTaskTC,
   changeTodolistFilterAC,
   removeTaskTC,
   updateTaskTC,
-} from 'features/index';
+} from 'features';
 
-type PropsType = {
-  demo: boolean;
-};
-
-export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
+export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }) => {
   const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn);
   const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(
     state => state.todolists,

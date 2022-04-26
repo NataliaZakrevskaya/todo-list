@@ -16,11 +16,11 @@ import { EMPTY_STRING } from '../../constants';
 
 import { loginTC } from './auth-reducer';
 import { MIN_PASSWORD_LENGTH } from './constants';
-import { ErrorValues } from '../enums/enums';
 import style from './Login.module.css';
 import { FormikErrorType } from './types';
 
 import { AppRootStateType } from 'app/store';
+import { ErrorValues } from 'enums';
 
 export const Login = () => {
   const dispatch = useDispatch();
