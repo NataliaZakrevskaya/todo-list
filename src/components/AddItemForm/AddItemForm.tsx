@@ -8,7 +8,6 @@ import style from './AddItemForm.module.css';
 
 type AddItemFormPropsType = {
   addItem: (title: string) => void;
-  // eslint-disable-next-line react/require-default-props
   disabled?: boolean;
 };
 

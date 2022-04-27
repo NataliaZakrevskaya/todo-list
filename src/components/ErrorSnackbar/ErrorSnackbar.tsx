@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React, { ReactElement, SyntheticEvent } from 'react';
 
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
@@ -11,7 +11,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
   <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 ));
 
-export const ErrorSnackbar = () => {
+export const ErrorSnackbar = (): ReactElement => {
   const error = useSelector<AppRootStateType, string | null>(state => state.app.error);
 
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export const ErrorSnackbar = () => {
   const handleClose = (
     event: Event | SyntheticEvent<any, Event>,
     reason: SnackbarCloseReason,
-  ) => {
+  ): void => {
     if (reason === 'clickaway') {
       return;
     }

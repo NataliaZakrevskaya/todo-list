@@ -1,4 +1,4 @@
-import { TodolistType } from '../../Todolists/types/types';
+import { TodolistType } from '../../Todolists/types';
 import {
   ADD_TASK,
   ADD_TODOLIST,

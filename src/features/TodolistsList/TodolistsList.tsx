@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 import { LOGIN_URL } from '../../constants';
 
 import { TasksStateType } from './Tasks/types';
-import { FilterValuesType, TodolistDomainType } from './Todolists/types/types';
+import { FilterValuesType, TodolistDomainType } from './Todolists/types';
 
 import { AppRootStateType } from 'app/store';
 import { AddItemForm } from 'components';

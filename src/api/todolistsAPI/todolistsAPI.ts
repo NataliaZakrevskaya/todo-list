@@ -5,7 +5,7 @@ import { ResponseType } from '../types';
 
 import { TODO_LISTS } from './constants';
 
-import { TodolistType } from 'features/TodolistsList/Todolists/types/types';
+import { TodolistType } from 'features/TodolistsList/Todolists/types';
 
 export const todolistsAPI = {
   getTodolists() {

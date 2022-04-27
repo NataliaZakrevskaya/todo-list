@@ -13,7 +13,7 @@ import {
   TodolistDomainType,
   TodolistsReducerActionsType,
   TodolistType,
-} from '../types/types';
+} from '../types';
 
 const initialState: Array<TodolistDomainType> = [];
 

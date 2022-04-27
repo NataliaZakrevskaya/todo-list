@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 
 import { FilterValues, LoadingStatuses } from '../../../enums';
-import { TodolistPropsType } from '../types/types';
+import { TodolistPropsType } from '../types';
 
 import style from './Todolist.module.css';
 

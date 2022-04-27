@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { TodolistsReducerActionsType, TodolistsThunkDispatch } from '../types/types';
+import { TodolistsReducerActionsType, TodolistsThunkDispatch } from '../types';
 
 import { todolistsAPI } from 'api/todolistsAPI/todolistsAPI';
 import { setAppStatusAC } from 'app';
