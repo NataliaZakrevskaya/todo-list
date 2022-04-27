@@ -24,6 +24,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "react/jsx-props-no-spreading": "off",
     "no-shadow": "off",
     "no-alert": "error",
     "no-debugger": "error",
@@ -64,7 +65,6 @@
     "react/prop-types": 0,
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
-    "react/destructuring-assignment": "error",
     "react/jsx-filename-extension": [
       1,
       {

@@ -1,12 +1,10 @@
 import { Dispatch } from 'redux';
 
-import {
-  SetAppErrorActionType,
-  SetAppStatusActionType,
-} from '../../../../app/app-reducer';
 import { TaskPriorities, TaskStatuses } from '../../../../enums';
 import { addTodolistAC, removeTodolistAC, setTodolistsAC } from '../../Todolists';
 import { addTaskAC, removeTaskAC, setTasksAC, updateTaskAC } from '../tasksReducer';
+
+import { SetAppErrorActionType, SetAppStatusActionType } from 'app/App/types';
 
 export type TasksReducerActionsType =
   | ReturnType<typeof removeTaskAC>

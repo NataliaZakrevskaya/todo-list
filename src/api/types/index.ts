@@ -29,7 +29,7 @@ export type UpdateTaskModelType = {
   startDate: string;
   deadline: string;
 };
-export type GetTasksResponse = {
+export type GetTasksResponseType = {
   error: string | null;
   totalCount: number;
   items: TaskType[];

@@ -1,5 +1,5 @@
-export { appReducer } from './app-reducer';
-export { setAppErrorAC } from './app-reducer';
-export { setAppStatusAC } from './app-reducer';
-export { setIsInitializedAC } from './app-reducer';
+export { appReducer } from './App/appReducer/appReducer';
+export { setAppErrorAC } from './App/appReducer/appReducer';
+export { setAppStatusAC } from './App/appReducer/appReducer';
+export { setIsInitializedAC } from './App/appReducer/appReducer';
 export { store } from './store';

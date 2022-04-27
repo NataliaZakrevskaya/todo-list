@@ -1,0 +1,3 @@
+export const SET_STATUS = 'APP/SET-STATUS';
+export const SET_ERROR = 'APP/SET-ERROR';
+export const SET_INITIALIZED = 'APP/SET-INITIALIZED';

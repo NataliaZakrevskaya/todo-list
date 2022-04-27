@@ -1,5 +1,5 @@
-import { SetAppErrorActionType, SetAppStatusActionType } from '../../../app/app-reducer';
-import { setIsLoggedInAC, initialState } from '../auth-reducer';
+import { SetAppErrorActionType, SetAppStatusActionType } from '../../../app/App/types';
+import { setIsLoggedInAC, initialState } from '../Auth/authReducer/authReducer';
 
 export type AuthReducerActionsType =
   | ReturnType<typeof setIsLoggedInAC>

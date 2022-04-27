@@ -1,9 +1,8 @@
 export { authReducer } from './Login';
 export { setIsLoggedInAC } from './Login';
-export { initializeAppTC } from './Login';
 export { loginTC } from './Login';
 export { logoutTC } from './Login';
-export { Login } from './Login';
+export { initializeAppTC } from './Login';
 
 export { TodolistsList } from './TodolistsList';
 export { fetchTodolistsTC } from './TodolistsList';

@@ -1,5 +1,7 @@
+import { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 
+import { SetAppErrorActionType, SetAppStatusActionType } from '../../../../app/App/types';
 import { LoadingStatuses } from '../../../enums';
 import {
   TasksReducerActionsType,
@@ -8,13 +10,9 @@ import {
   UpdateDomainTaskModelType,
 } from '../types';
 
-import { todolistsAPI } from 'api/todolistsAPI/todolistsAPI';
-import { UpdateTaskModelType } from 'api/types';
-import {
-  SetAppErrorActionType,
-  setAppStatusAC,
-  SetAppStatusActionType,
-} from 'app/app-reducer';
+import { tasksAPI } from 'api/todolistsAPI/tasksAPI';
+import { GetTasksResponseType, UpdateTaskModelType } from 'api/types';
+import { setAppStatusAC } from 'app/App/appReducer/appReducer';
 import { AppRootStateType } from 'app/store';
 import { ResultCodes } from 'enums';
 import { addTaskAC, removeTaskAC, setTasksAC, updateTaskAC } from 'features';
@@ -24,7 +22,7 @@ export const fetchTasksTC =
   (todolistId: string) =>
   (dispatch: Dispatch<TasksReducerActionsType | SetAppStatusActionType>) => {
     dispatch(setAppStatusAC(LoadingStatuses.Loading));
-    todolistsAPI.getTasks(todolistId).then(res => {
+    tasksAPI.getTasks(todolistId).then((res: AxiosResponse<GetTasksResponseType>) => {
       const tasks = res.data.items;
       dispatch(setTasksAC(tasks, todolistId));
       dispatch(setAppStatusAC(LoadingStatuses.Succeeded));
@@ -33,7 +31,7 @@ export const fetchTasksTC =
 export const removeTaskTC =
   (taskId: string, todolistId: string) =>
   (dispatch: Dispatch<TasksReducerActionsType>) => {
-    todolistsAPI.deleteTask(todolistId, taskId).then(() => {
+    tasksAPI.deleteTask(todolistId, taskId).then(() => {
       dispatch(removeTaskAC(taskId, todolistId));
     });
   };
@@ -45,9 +43,9 @@ export const addTaskTC =
     >,
   ) => {
     dispatch(setAppStatusAC(LoadingStatuses.Loading));
-    todolistsAPI
+    tasksAPI
       .createTask(todolistId, title)
-      .then(res => {
+      .then((res: any) => {
         if (res.data.resultCode === ResultCodes.Success) {
           const task = res.data.data.item;
           dispatch(addTaskAC(task));
@@ -56,7 +54,7 @@ export const addTaskTC =
           handleServerAppError(res.data, dispatch);
         }
       })
-      .catch(error => {
+      .catch((error: any) => {
         handleServerNetworkError(error, dispatch);
       });
   };
@@ -81,16 +79,16 @@ export const updateTaskTC =
       ...domainModel,
     };
 
-    todolistsAPI
+    tasksAPI
       .updateTask(todolistId, taskId, apiModel)
-      .then(res => {
+      .then((res: any) => {
         if (res.data.resultCode === ResultCodes.Success) {
           dispatch(updateTaskAC(taskId, domainModel, todolistId));
         } else {
           handleServerAppError(res.data, dispatch);
         }
       })
-      .catch(error => {
+      .catch((error: any) => {
         handleServerNetworkError(error, dispatch);
       });
   };

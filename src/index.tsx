@@ -3,19 +3,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'index.css';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
-import App from 'app/App';
+import App from 'app/App/App';
 import { store } from 'app/store';
 import reportWebVitals from 'reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );

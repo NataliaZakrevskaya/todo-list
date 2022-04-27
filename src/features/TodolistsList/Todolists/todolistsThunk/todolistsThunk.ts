@@ -15,7 +15,7 @@ import { LoadingStatuses } from 'features/enums';
 
 export const fetchTodolistsTC = () => (dispatch: TodolistsThunkDispatch) => {
   dispatch(setAppStatusAC(LoadingStatuses.Loading));
-  todolistsAPI.getTodolists().then(res => {
+  todolistsAPI.getTodolists().then((res: any) => {
     dispatch(setTodolistsAC(res.data));
     dispatch(setAppStatusAC(LoadingStatuses.Succeeded));
   });
@@ -31,7 +31,7 @@ export const removeTodolistTC =
   };
 export const addTodolistTC = (title: string) => (dispatch: TodolistsThunkDispatch) => {
   dispatch(setAppStatusAC(LoadingStatuses.Loading));
-  todolistsAPI.createTodolist(title).then(res => {
+  todolistsAPI.createTodolist(title).then((res: any) => {
     dispatch(addTodolistAC(res.data.data.item));
     dispatch(setAppStatusAC(LoadingStatuses.Succeeded));
   });

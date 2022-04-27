@@ -8,6 +8,7 @@ import style from './AddItemForm.module.css';
 
 type AddItemFormPropsType = {
   addItem: (title: string) => void;
+  // eslint-disable-next-line react/require-default-props
   disabled?: boolean;
 };
 
@@ -16,7 +17,7 @@ export const AddItemForm = React.memo(
     const [title, setTitle] = useState('');
     const [error, setError] = useState<string | null>(null);
 
-    const addItemHandler = () => {
+    const onButtonClick = (): void => {
       if (title.trim() !== '') {
         addItem(title);
         setTitle('');
@@ -25,16 +26,16 @@ export const AddItemForm = React.memo(
       }
     };
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onTextFieldChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setTitle(e.currentTarget.value);
     };
 
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    const onTextFieldKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
       if (error !== null) {
         setError(null);
       }
       if (e.code === 'Enter') {
-        addItemHandler();
+        onButtonClick();
       }
     };
 
@@ -45,12 +46,12 @@ export const AddItemForm = React.memo(
           disabled={disabled}
           error={!!error}
           value={title}
-          onChange={onChangeHandler}
-          onKeyPress={onKeyPressHandler}
+          onChange={onTextFieldChange}
+          onKeyPress={onTextFieldKeyPress}
           label="Title"
           helperText={error}
         />
-        <IconButton color="primary" onClick={addItemHandler} disabled={disabled}>
+        <IconButton color="primary" onClick={onButtonClick} disabled={disabled}>
           <AddBox />
         </IconButton>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -12,9 +12,9 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { EMPTY_STRING } from '../../constants';
+import { EMPTY_STRING, EMPTY_URL } from '../../constants';
 
-import { loginTC } from './auth-reducer';
+import { loginTC } from './Auth';
 import { MIN_PASSWORD_LENGTH } from './constants';
 import style from './Login.module.css';
 import { FormikErrorType } from './types';
@@ -22,7 +22,9 @@ import { FormikErrorType } from './types';
 import { AppRootStateType } from 'app/store';
 import { ErrorValues } from 'enums';
 
-export const Login = () => {
+export const Login: FC = () => {
+  const SOCIAL_NETWORK_LINK = 'https://social-network.samuraijs.com/';
+
   const dispatch = useDispatch();
   const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn);
 
@@ -53,22 +55,18 @@ export const Login = () => {
   });
 
   if (isLoggedIn) {
-    return <Navigate to="/" />;
+    return <Navigate to={EMPTY_URL} />;
   }
 
   return (
     <Grid container className={style.loginBlock}>
       <Grid item justifyContent="center">
         <form onSubmit={formik.handleSubmit}>
-          <FormControl>
+          <FormControl className={style.LoginForm}>
             <FormLabel>
               <p>
                 To log in get registered
-                <a
-                  href="https://social-network.samuraijs.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={SOCIAL_NETWORK_LINK} target="_blank" rel="noreferrer">
                   {' '}
                   here
                 </a>

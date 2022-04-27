@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
 
+import { RequestStatusType, SetAppStatusActionType } from '../../../../app/App/types';
 import { TaskStatuses } from '../../../../enums';
 import { TaskType } from '../../Tasks/types';
 
-import { RequestStatusType, SetAppStatusActionType } from 'app/app-reducer';
 import {
   addTodolistAC,
   changeTodolistEntityStatusAC,
@@ -48,9 +48,4 @@ export type TodolistPropsType = {
   removeTask: (taskId: string, todolistId: string) => void;
   removeTodolist: (id: string) => void;
   changeTodolistTitle: (id: string, newTitle: string) => void;
-  demo: boolean;
-};
-
-export type TodolistsListPropsType = {
-  demo: boolean;
 };

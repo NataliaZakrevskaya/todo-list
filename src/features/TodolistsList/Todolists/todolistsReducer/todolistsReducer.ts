@@ -1,3 +1,4 @@
+import { RequestStatusType } from '../../../../app/App/types';
 import { FilterValues, LoadingStatuses } from '../../../enums';
 import {
   ADD_TODOLIST,
@@ -13,8 +14,6 @@ import {
   TodolistsReducerActionsType,
   TodolistType,
 } from '../types/types';
-
-import { RequestStatusType } from 'app/app-reducer';
 
 const initialState: Array<TodolistDomainType> = [];
 

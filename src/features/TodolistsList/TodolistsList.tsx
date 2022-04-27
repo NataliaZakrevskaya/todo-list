@@ -5,12 +5,10 @@ import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { LOGIN_URL } from '../../constants';
+
 import { TasksStateType } from './Tasks/types';
-import {
-  FilterValuesType,
-  TodolistDomainType,
-  TodolistsListPropsType,
-} from './Todolists/types/types';
+import { FilterValuesType, TodolistDomainType } from './Todolists/types/types';
 
 import { AppRootStateType } from 'app/store';
 import { AddItemForm } from 'components';
@@ -23,10 +21,17 @@ import {
   changeTodolistFilterAC,
   removeTaskTC,
   updateTaskTC,
+  addTodolistTC,
+  changeTodolistTitleTC,
 } from 'features';
 
-export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }) => {
-  const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn);
+export const TodolistsList: React.FC = () => {
+  const CONTAINER_SPACING = 3;
+  const PAPER_ELEVATION = 3;
+
+  const isLoggedIn = useSelector<AppRootStateType, boolean>(
+    state => state.auth.isLoggedIn,
+  );
   const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(
     state => state.todolists,
   );
@@ -49,7 +54,7 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
     dispatch(addTaskTC(title, todolistId));
   }, []);
 
-  const changeStatus = useCallback(
+  const changeTaskStatus = useCallback(
     (id: string, status: TaskStatuses, todolistId: string) => {
       dispatch(updateTaskTC(id, { status }, todolistId));
     },
@@ -72,18 +77,18 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
   }, []);
 
   const changeTodolistTitle = useCallback((id: string, title: string) => {
-    dispatch(changeTodolistTitle(id, title));
+    dispatch(changeTodolistTitleTC(id, title));
   }, []);
 
   const addTodolist = useCallback(
     (title: string) => {
-      dispatch(addTodolist(title));
+      dispatch(addTodolistTC(title));
     },
     [dispatch],
   );
 
   if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to={LOGIN_URL} />;
   }
 
   return (
@@ -91,24 +96,23 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
       <Grid container style={{ padding: '20px' }}>
         <AddItemForm addItem={addTodolist} />
       </Grid>
-      <Grid container spacing={3}>
-        {todolists.map(tl => {
-          const allTodolistTasks = tasks[tl.id];
+      <Grid container spacing={CONTAINER_SPACING}>
+        {todolists.map(todolist => {
+          const allTodolistTasks = tasks[todolist.id];
 
           return (
-            <Grid item key={tl.id}>
-              <Paper elevation={3} style={{ padding: '10px' }}>
+            <Grid item key={todolist.id}>
+              <Paper elevation={PAPER_ELEVATION} style={{ padding: '10px' }}>
                 <Todolist
-                  todolist={tl}
+                  todolist={todolist}
                   tasks={allTodolistTasks}
                   removeTask={deleteTask}
                   changeFilter={changeFilter}
                   addTask={addTask}
-                  changeTaskStatus={changeStatus}
+                  changeTaskStatus={changeTaskStatus}
                   removeTodolist={removeTodolist}
                   changeTaskTitle={changeTaskTitle}
                   changeTodolistTitle={changeTodolistTitle}
-                  demo={demo}
                 />
               </Paper>
             </Grid>

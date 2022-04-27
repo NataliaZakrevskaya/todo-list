@@ -12,12 +12,12 @@ import { EditableSpan } from 'components';
 import { TaskStatuses } from 'enums';
 
 export const Task = React.memo((props: TaskPropsType) => {
-  const onClickHandler = useCallback(
+  const onDeleteButtonClick = useCallback(
     () => props.removeTask(props.task.id, props.todolistId),
     [props.task.id, props.todolistId],
   );
 
-  const onChangeHandler = useCallback(
+  const onCheckboxChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const newIsDoneValue = e.currentTarget.checked;
       props.changeTaskStatus(
@@ -48,11 +48,11 @@ export const Task = React.memo((props: TaskPropsType) => {
       <Checkbox
         checked={props.task.status === TaskStatuses.Completed}
         color="primary"
-        onChange={onChangeHandler}
+        onChange={onCheckboxChange}
       />
 
       <EditableSpan value={props.task.title} onChange={onTitleChangeHandler} />
-      <IconButton onClick={onClickHandler}>
+      <IconButton onClick={onDeleteButtonClick}>
         <Delete />
       </IconButton>
     </div>

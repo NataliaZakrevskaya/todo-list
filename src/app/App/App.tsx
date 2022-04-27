@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { CircularProgress } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -10,30 +10,35 @@ import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { RequestStatusType } from './app-reducer';
-import s from './App.module.css';
-import { AppRootStateType } from './store';
+import { EMPTY_URL, LOGIN_URL, NOT_FOUND_URL, UNDEFINED_URL } from '../../constants';
+import { AppRootStateType } from '../store';
+
+import style from './App.module.css';
+import { RequestStatusType } from './types';
 
 import { ErrorSnackbar } from 'components';
-import { initializeAppTC, logoutTC, Login, TodolistsList } from 'features';
+import { initializeAppTC, logoutTC, TodolistsList } from 'features';
+import { LoadingStatuses } from 'features/enums';
+import { Login } from 'features/Login/Login';
 
-type PropsType = {
-  demo?: boolean;
-};
+const App = (): ReactElement => {
+  const dispatch = useDispatch();
 
-const App = ({ demo = false }: PropsType) => {
   const status = useSelector<AppRootStateType, RequestStatusType>(
     state => state.app.status,
   );
   const isInitialized = useSelector<AppRootStateType, boolean>(
     state => state.app.isInitialized,
   );
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn);
 
   useEffect(() => {
     dispatch(initializeAppTC());
   });
+
+  const onLogoutButtonClick = (): void => {
+    dispatch(logoutTC());
+  };
 
   if (!isInitialized) {
     return (
@@ -43,15 +48,11 @@ const App = ({ demo = false }: PropsType) => {
     );
   }
 
-  const logoutHandler = () => {
-    dispatch(logoutTC());
-  };
-
   return (
-    <div className="App">
+    <div>
       <ErrorSnackbar />
       <AppBar position="static" color="primary">
-        <Toolbar className={s.toolBar} variant="regular">
+        <Toolbar className={style.toolBar} variant="regular">
           <Typography variant="overline" style={{ fontSize: '24px' }}>
             Todo List
           </Typography>
@@ -59,24 +60,24 @@ const App = ({ demo = false }: PropsType) => {
             <Button
               color="inherit"
               variant="outlined"
-              onClick={logoutHandler}
+              onClick={onLogoutButtonClick}
               style={{ fontSize: '16px' }}
             >
               LOG OUT
             </Button>
           )}
         </Toolbar>
-        {status === 'loading' && <LinearProgress />}
+        {status === LoadingStatuses.Loading && <LinearProgress />}
       </AppBar>
       <Container fixed>
         <Routes>
-          <Route path="/" element={<TodolistsList demo={demo} />} />
-          <Route path="/login" element={<Login />} />
+          <Route path={EMPTY_URL} element={<TodolistsList />} />
+          <Route path={LOGIN_URL} element={<Login />} />
           <Route
-            path="/404"
+            path={NOT_FOUND_URL}
             element={<h1 style={{ textAlign: 'center' }}>404 Page not found</h1>}
           />
-          <Route path="*" element={<Navigate to="/404" />} />
+          <Route path={UNDEFINED_URL} element={<Navigate to={NOT_FOUND_URL} />} />
         </Routes>
       </Container>
     </div>
