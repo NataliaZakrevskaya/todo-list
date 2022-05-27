@@ -14,8 +14,6 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
     .me()
     .then(res => {
       if (res.data.resultCode === ResultCodes.Success) {
-        // eslint-disable-next-line no-debugger
-        debugger;
         dispatch(setIsLoggedInAC(true));
       }
     })
